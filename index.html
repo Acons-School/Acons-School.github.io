@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ACONS Driving School</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="indexstyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="topnav">
+        <div class="logo">
+            <img src="logo.png" alt="ACONS Logo"> <div>
+                <h1 class="title">ACONS Driving School</h1>
+                <p class="subtitle">Your journey to the road starts here!</p>
+            </div>
+        </div>
+
+        <div class="menu">
+            <a href="login.html"><button class="login-btn">Login</button></a>
+            <a href="#register"><button class="signup-btn">Sign Up</button></a>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-title">
+            <h1>Excited to start driving?</h1>
+            <p>Join ACONS Driving School at Sidi Abdellah. Professional instructors, flexible hours, and high success rates.</p>
+            <a href="#register" style="text-decoration: none;"><button class="signup-btn" style="padding: 15px 30px; font-size: 1.2rem;">Register Now!!</button></a>
+        </div>
+        <img src="aconss.png" alt="Driving" class="hero-img"> </div>
+
+    <main>
+        <div class="about">
+            <h1>Our Mission</h1>
+            <p class="intro">
+                ACONS is dedicated to providing top-tier driving education in Algiers. Founded by a team of committed professionals, we ensure our students gain the confidence and skills needed to navigate Algerian roads safely.
+            </p>
+        </div>
+
+       <section id="register" style="padding: 50px 10%; background: #f9f9f9; border-radius: 15px; margin: 20px;">
+    <h1 style="text-align: center;">Pre-Registration Form</h1>
+    <form id="drivingForm" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 0 auto;">
+        
+        <input type="text" id="fname" placeholder="First Name" required style="padding: 10px;">
+        <input type="text" id="lname" placeholder="Last Name" required style="padding: 10px;">
+        
+        <input type="email" id="email" placeholder="Email Address (e.g. name@mail.com)" required style="padding: 10px;">
+        
+        <input type="tel" id="phone" placeholder="Phone Number (e.g. 05XX XX XX XX)" required style="padding: 10px;">
+
+        <input type="number" id="age" placeholder="Your Age" required style="padding: 10px;">
+        
+        <div id="parentalConsent" style="display:none; background: #fff3cd; padding: 10px; border-radius: 5px; border: 1px solid #ffeeba;">
+            <label><input type="checkbox" id="consent"> I confirm I have parental permission to register.</label>
+        </div>
+
+        <select id="gender" style="padding: 10px;">
+            <option value="" disabled selected>Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <input type="text" id="address" placeholder="Address (e.g., Sidi Abdellah)" required style="padding: 10px;">
+
+        <select id="licenseType" style="padding: 10px;">
+            <option value="" disabled selected>Select License Type</option>
+            <option value="A">Type A (Motorcycle)</option>
+            <option value="B">Type B (Light Vehicle/Car)</option>
+            <option value="C">Type C (Heavy Vehicle)</option>
+            <option value="D">Type D (Public Transport)</option>
+        </select>
+
+        <button type="submit" class="test-btn" style="width: 100%; border: none; cursor: pointer;">Verify & Submit</button>
+    </form>
+</section>
+</main>
+
+    <footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            <h2 class="footer-item">Contact Us</h2>
+            <p class="footer-item"><i class="fa-solid fa-location-dot"></i> Sidi Abdellah University Pole, Algiers</p>
+            <p class="footer-item"><i class="fa-brands fa-instagram"></i> <a href="https://www.instagram.com/math._scapevr">Follow us on Instagram</a></p>
+            <p class="footer-item"><i class="fa-brands fa-facebook-f"></i> <a href="https://www.facebook.com/profile.php?id=61560068546777">Find us on Facebook</a></p>
+            
+            <div style="margin-top: 20px;">
+                <h4 style="color: #fff; margin-bottom: 5px;">Founders:</h4>
+                <p style="color: #eee; font-size: 0.85rem; line-height: 1.4;">
+                    Saidani Manel Lyna &bull; Achit Chahinez &bull; Benyamina Assia &bull; Boukhezna Oumaima &bull; Nour Rayane
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <img src="NHSM_logo.webp" alt="NHSM Logo" class="nhsmlogo">
+        </div>
+    </div>
+</footer>
+
+    <script>
+        const ageInput = document.getElementById('age');
+        const consentDiv = document.getElementById('parentalConsent');
+        const form = document.getElementById('drivingForm');
+
+        ageInput.addEventListener('input', () => {
+            const age = parseInt(ageInput.value);
+            if (age >= 16 && age <= 18) {
+                consentDiv.style.display = 'block';
+            } else {
+                consentDiv.style.display = 'none';
+            }
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const age = parseInt(ageInput.value);
+            if (age < 16) {
+                alert("You must be at least 16 years old to register.");
+            } else if (age >= 16 && age <= 18 && !document.getElementById('consent').checked) {
+                alert("Please check the parental permission box.");
+            } else {
+                alert("Thank you for registering with ACONS! We will contact you soon.");
+                form.reset();
+                consentDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
