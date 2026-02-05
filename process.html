@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information System Logic - ACONS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="indexstyles.css">
+    <style>
+        .process-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h2 { color: #FF7F50; margin-top: 30px; border-bottom: 2px solid #FFDAC1; padding-bottom: 10px; }
+        .model-box { background: #fff5f0; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; }
+        .model-img { max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        code { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 8px; display: block; overflow-x: auto; white-space: pre; }
+        .back-btn { background: #555; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 0.9rem; }
+    </style>
+</head>
+<body style="background: linear-gradient(135deg, #FFB7B2 0%, #FFDAC1 100%);">
+
+    <div class="process-container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        
+        <h1 style="margin-top:20px;">ACONS Information System Case Study</h1>
+        
+        <h2>1. Data Handling & Registration</h2>
+        <p>The system begins by collecting student data. A person registers by providing their <strong>Full Name, Age, Address, and License Type</strong>. Our system performs a front-end validation check: if the user is between 16 and 18, the system flags a mandatory <em>Parental Permission</em> requirement.</p>
+
+        <h2>2. Examination Phases</h2>
+        <p>Once registered, the data follows the student through two distinct phases:</p>
+        <ul>
+            <li><strong>Theoretical Phase:</strong> Tracking the "Code" learning progress and exam results.</li>
+            <li><strong>Practical Phase:</strong> Managing driving hours, "Circuit" training, and final road exams.</li>
+        </ul>
+
+        <h2>3. Conceptual Data Model (CDM)</h2>
+        <p>This model illustrates the high-level relationships between Students, Instructors, and Exam Appointments.</p>
+        <div class="model-box">
+            <img src="cdm.png" alt="CDM Model" class="model-img">
+        </div>
+
+       <section>
+    <h2>4. Logical Data Model (LDM)</h2>
+    <p>Our LDM defines the specific relations and attributes that structure the ACONS database. We have identified the following relational schema:</p>
+    
+    <div style="background: #fff; border-left: 5px solid #FF7F50; padding: 20px; margin: 20px 0; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; line-height: 1.8; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        <ul style="list-style: none; padding: 0;">
+            <li><strong>CATEGORY</strong> (<u>category_id</u>, category_code, minimum_age)</li>
+            <li><strong>TRAINEE</strong> (<u>trainee_id</u>, first_name, last_name, dob, address, phone, status, #category_id)</li>
+            <li><strong>INSTRUCTOR</strong> (<u>instructor_id</u>, first_name, last_name, phone)</li>
+            <li><strong>LESSON</strong> (<u>lesson_id</u>, type, date, time, status, duration, #instructor_id)</li>
+            <li><strong>EXAM</strong> (<u>exam_id</u>, type, date, status)</li>
+            <li><strong>ATTENDS</strong> (<u>#trainee_id, #lesson_id</u>)</li>
+            <li><strong>TAKES</strong> (<u>#lesson_id, #exam_id</u>)</li>
+        </ul>
+    </div>
+    <p><small><em>Note: Underlined attributes are Primary Keys; attributes preceded by # are Foreign Keys.</em></small></p>
+</section>
+        <h2>5. SQL Implementation</h2>
+        <p>The final stage is implementing the schema into an SQL database to ensure persistent storage and easy retrieval.</p>
+        <code>
+
+CREATE TABLE CATEGORY (
+    category_id INT PRIMARY KEY,
+    category_code VARCHAR(2), -- A, B, C, D
+    minimum_age INT
+);
+
+CREATE TABLE TRAINEE (
+    trainee_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    dob DATE,
+    phone_number VARCHAR(15),
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES CATEGORY(category_id)
+);
+        </code>
+    </div>
+</body>
+</html>
