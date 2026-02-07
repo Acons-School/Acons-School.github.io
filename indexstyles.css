@@ -87,7 +87,8 @@ footer {
 }
 
 .hero-img {
-    width: 300px;
+    width: 400px;
+    height: auto;
     flex: 0 2 300px;
 }
 
@@ -132,17 +133,19 @@ main h1 {
 main {
     margin-top: 0;
     padding: 15px;
-    /* Use your new car photo or any high-res background here */
-    background-image: url("wall.png"); 
     
-    /* FIX: This makes it one big image that covers the whole section */
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Optional: keeps image still while scrolling */
+    /* This removes all previous images */
+    background-image: none !important; 
     
-    background-color: rgb(199,201,221,1);
-    box-shadow: 0 1px 15px #777777 inset;
+    /* This is a solid, clear grey */
+    background-color: #9c9999 !important; 
+    
+    /* This shadow creates the "inset" look you had before */
+    box-shadow: 0 1px 15px #333333 inset;
+    
+    /* Ensure the background doesn't try to behave like a photo */
+    background-size: auto;
+    background-attachment: scroll;
 }
 .members {
     padding: 50px;
